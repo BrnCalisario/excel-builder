@@ -1,6 +1,8 @@
 namespace UnitTest;
 
-using ExcelEntity;
+
+using ExcelEntity.Extensions;
+using ExcelEntity.Models;
 using OfficeOpenXml;
 using System;
 using System.IO;

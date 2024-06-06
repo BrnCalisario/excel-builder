@@ -1,4 +1,4 @@
-﻿namespace ExcelEntity;
+﻿namespace ExcelEntity.Extensions;
 
 using OfficeOpenXml;
 using System.Linq;
@@ -25,27 +25,4 @@ public static class ExcelExtensions
             worksheet.Cells[offsetRow + i, colIndex].Value = data[i - 1];
         }
     }
-
-    public static ExcelWorksheetBuilder WithColumns(this ExcelWorksheetBuilder worksheet, string[][] data, int startColumn, int offsetRow = 0)
-    {
-        for (int i = 1; i <= data.Length; i++)
-        {
-            worksheet.Worksheet.AddColumnData(data[i - 1], offsetRow, startColumn + i);
-        }
-
-        return worksheet;
-
-    }
-
-    public static ExcelWorksheetBuilder WithHeader(this ExcelWorksheetBuilder worksheet, string[] header, int offsetRow = 0, int offsetCol = 0)
-    {
-        worksheet.Worksheet.AddHeader(header, offsetRow, offsetCol);
-        return worksheet;
-    }
-
-}
-
-public class ExcelWorksheetBuilder
-{ 
-    public ExcelWorksheet Worksheet { get; set; }
 }

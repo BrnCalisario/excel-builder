@@ -1,6 +1,7 @@
-﻿using OfficeOpenXml;
+﻿namespace ExcelEntity.Builder;
 
-namespace ExcelEntity;
+using OfficeOpenXml;
+
 public class ExcelBuilder
 {
     private readonly ExcelPackage package = new();
@@ -13,7 +14,7 @@ public class ExcelBuilder
 
     public ExcelWorksheetBuilder WithWorksheet(string name)
     {
-        var worksheet = this.package.Workbook.Worksheets.Add(name);
+        var worksheet = package.Workbook.Worksheets.Add(name);
         return new ExcelWorksheetBuilder() { Worksheet = worksheet };
     }
 
@@ -21,7 +22,7 @@ public class ExcelBuilder
     {
         foreach (var name in names)
         {
-            this.package.Workbook.Worksheets.Add(name);
+            package.Workbook.Worksheets.Add(name);
         }
 
         return this;
