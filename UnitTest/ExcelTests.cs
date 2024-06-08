@@ -1,10 +1,9 @@
 namespace UnitTest;
 
-
-using ExcelEntity.Extensions;
-using ExcelEntity.Models;
+using ExcelEntity.Builder;
 using OfficeOpenXml;
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 public class ExcelTests
@@ -27,16 +26,15 @@ public class ExcelTests
         var builder = new ExcelBuilder()
             .WithLicense(LicenseContext.NonCommercial);
 
-        string[][] data = [
-            ["John", "James", "Jonathan"], 
-            ["18/12/2002", "19/03/2000"]
-        ];
+        var data = new List<Person>
+        {
+            new Person { Name = "John", BirthDate = new DateTime(2002, 12, 18) },
+            new Person { Name = "James", BirthDate = new DateTime(2000, 3, 19) },
+            new Person { Name = "Jonathan", BirthDate = new DateTime(1999, 5, 20) }
+        };
 
-        builder
-            .WithWorksheet("My Data")
-            .WithHeader(["Name", "Birthdate"])
-            .WithColumns(data, 0, 1);
-
+        builder.WithWorksheet(data, new List<string> { "Name", "BirthDate" }, "People");
+    
         var excel = builder.Build();
 
         excel.SaveAs(Path.Combine(outputFolder, $"{nameof(CreateWithWorksheets)}.xlsx"));         

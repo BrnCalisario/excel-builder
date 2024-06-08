@@ -1,6 +1,6 @@
-﻿using ExcelEntity.Models;
+﻿namespace ExcelEntity.Extensions;
 
-namespace ExcelEntity.Extensions;
+using ExcelEntity.Builder;
 
 public static class BuilderExtensions
 {
